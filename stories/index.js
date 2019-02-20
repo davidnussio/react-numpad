@@ -190,27 +190,27 @@ storiesOf('Date Time Editor', module)
     <DisplayContainer>
       <div>
         <NumPad.DateTime
-          dateFormat="HH:mm"
+          dateFormat="hh:mm A"
           onChange={action('onChange')}
           position="startBottomLeft"
-          placeholder="HH:mm"
+          placeholder="hh:mm A"
           sync
         />
       </div>
-      <NumPad.DateTime
+      {/* <NumPad.DateTime
         dateFormat="HH:mm"
         onChange={action('onChange')}
         position="startBottomLeft"
         placeholder="HH:mm"
         sync
         inline
-      />
+      /> */}
     </DisplayContainer>
   ))
   .add('time with default → sync', () => {
-    const formatString = text('format string', 'HH:mm');
+    const formatString = text('format string', 'hh:mm A');
     const Demo = () => {
-      const [value, setValue] = useState('21:45');
+      const [value, setValue] = useState('09:');
 
       return (
         <NumPad.DateTime
