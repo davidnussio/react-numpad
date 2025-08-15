@@ -1,7 +1,7 @@
 import { useUnit } from 'effector-react';
 import React, { useRef, useState } from 'react';
-import { cancelEvent, updateInitialValueEvent } from '@/models/numpad';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { cancelEvent, updateInitialValueEvent } from 'shared/models/numpad';
+import { Popover, PopoverContent, PopoverTrigger } from 'shared/ui/popover';
 import { InlineNumpad } from './inline-numpad';
 
 interface PopoverNumpadProps {

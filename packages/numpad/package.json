@@ -1,0 +1,23 @@
+{
+  "name": "numpad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.tsx",
+  "scripts": {
+    "test": "vitest run --environment jsdom"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "effector": "^23.2.0",
+    "effector-react": "^23.2.0",
+    "shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.3.1",
+    "jsdom": "^26.1.0"
+  }
+}

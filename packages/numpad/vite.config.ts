@@ -4,14 +4,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "."),
-    },
-  },
   build: {
     lib: {
-      entry: resolve(__dirname, "components/numpad/index.ts"),
+      entry: resolve(__dirname, "index.tsx"),
       name: "ReactNumpad",
       // the proper extensions will be added
       fileName: "react-numpad",

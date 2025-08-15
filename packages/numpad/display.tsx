@@ -7,8 +7,8 @@ import {
   useEffect,
   useCallback,
 } from "react";
-import useLongPress from "../../hooks/useLongPress";
-import { Button } from "@/components/ui/button";
+import useLongPress from "shared/hooks/useLongPress";
+import { Button } from "shared/ui/button";
 import { useUnit } from "effector-react";
 import {
   $display,
@@ -16,7 +16,7 @@ import {
   clearEvent,
   pressKeyEvent,
   updateInitialValueEvent,
-} from "../../models/numpad";
+} from "shared/models/numpad";
 import { is } from "effector";
 
 export interface DisplayRef {

@@ -6,7 +6,7 @@ import {
   backspaceEvent,
   cancelEvent,
   pressKeyEvent,
-} from '../../models/numpad';
+} from 'shared/models/numpad';
 import { Display, type DisplayRef } from './display';
 import { Header } from './header';
 import { Keypad } from './keypad';

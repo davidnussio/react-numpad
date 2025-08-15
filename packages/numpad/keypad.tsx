@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "shared/ui/button";
 import { useUnit } from "effector-react";
-import { pressKeyEvent } from "../../models/numpad";
+import { pressKeyEvent } from "shared/models/numpad";
 
 type KeypadProps = {
   keypadKeys: string[];
