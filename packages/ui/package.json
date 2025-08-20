@@ -7,12 +7,22 @@
   ],
   "exports": {
     "./globals.css": "./dist/globals.css",
-    "./lib/*": "./dist/lib/*.js",
-    "./components/*": "./dist/components/*.js",
-    "./hooks/*": "./dist/hooks/*.js"
+    "./lib/*": {
+      "types": "./dist/lib/*.d.ts",
+      "import": "./dist/lib/*.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.js"
+    },
+    "./hooks/*": {
+      "types": "./dist/hooks/*.d.ts",
+      "import": "./dist/hooks/*.js"
+    }
   },
   "license": "MIT",
   "scripts": {
+    "build": "pnpm build:styles && pnpm build:components",
     "build:styles": "tailwindcss -i ./src/styles/globals.css -o ./dist/globals.css",
     "build:components": "tsc",
     "check-types": "tsc --noEmit",
