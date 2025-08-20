@@ -10,14 +10,10 @@ import {
 import { Input } from '@repo/ui/components/input';
 import { Separator } from '@repo/ui/components/separator';
 import { useState } from 'react';
+import { useTheme } from './hooks/useTheme';
 
 export function App() {
-  const toggleTheme = () => {
-    const root = window.document.documentElement;
-
-    root.classList.toggle('dark');
-    root.classList.toggle('light');
-  };
+  const { theme, setTheme, actualTheme, isSystemTheme } = useTheme();
 
   const [value, setValue] = useState<{
     [key: string]: string;
@@ -38,11 +34,37 @@ export function App() {
           'system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"',
       }}
     >
-      <header className="mb-4 flex justify-between">
-        <h1 className="font-bold text-2xl">React Numpad Demo </h1>
-        <Button onClick={toggleTheme} variant="outline">
-          Toggle theme
-        </Button>
+      <header className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col">
+          <h1 className="font-bold text-2xl">React Numpad Demo</h1>
+          <p className="text-muted-foreground text-sm">
+            Theme: {theme}
+            {isSystemTheme && ` (${actualTheme})`}
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => setTheme('light')}
+            size="sm"
+            variant={theme === 'light' ? 'default' : 'outline'}
+          >
+            Light
+          </Button>
+          <Button
+            onClick={() => setTheme('dark')}
+            size="sm"
+            variant={theme === 'dark' ? 'default' : 'outline'}
+          >
+            Dark
+          </Button>
+          <Button
+            onClick={() => setTheme('system')}
+            size="sm"
+            variant={theme === 'system' ? 'default' : 'outline'}
+          >
+            System
+          </Button>
+        </div>
       </header>
 
       <main className="flex flex-col gap-4 divide-y">
