@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "tsBuildInfoFile": ".tsbuildinfo/src.tsbuildinfo",
+    "tsBuildInfoFile": "node_modules/.tsbuildinfo/src.tsbuildinfo",
     "declaration": true,
     "declarationMap": true,
     "esModuleInterop": true,
@@ -11,11 +11,11 @@
     "moduleDetection": "force",
     "noUncheckedIndexedAccess": true,
     "resolveJsonModule": true,
+    "moduleResolution": "nodenext",
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "target": "es2022",
+    "module": "nodenext",
     "composite": true
   }
 }

@@ -42,5 +42,12 @@
       "npx ultracite format",
       "npx ultracite format"
     ]
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@tailwindcss/oxide",
+      "esbuild"
+    ]
   }
 }
