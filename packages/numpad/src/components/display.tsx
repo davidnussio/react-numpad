@@ -9,8 +9,8 @@ import { useUnit } from 'effector-react';
 import {
   forwardRef,
   useCallback,
-  useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -32,7 +32,9 @@ export const Display = forwardRef<DisplayRef, DisplayProps>(
     const backspaceLongPress = useLongPress(clear, longPressReactionMs);
     const inputRef = useRef<HTMLInputElement>(null);
     const [isFocused, setIsFocused] = useState(false);
-    const [cursorPosition, setCursorPosition] = useState(0);
+    // Use a ref for the cursor element so we can update its style synchronously
+    // without waiting for React to re-render.
+    const cursorRef = useRef<HTMLDivElement | null>(null);
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     useImperativeHandle(ref, () => ({
@@ -52,9 +54,7 @@ export const Display = forwardRef<DisplayRef, DisplayProps>(
         return 0;
       }
 
-      if (!canvasRef.current) {
-        canvasRef.current = document.createElement('canvas');
-      }
+      canvasRef.current ??= document.createElement('canvas');
 
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
@@ -68,20 +68,21 @@ export const Display = forwardRef<DisplayRef, DisplayProps>(
       return context.measureText(text).width;
     }, []);
 
-    // Update cursor position when display value changes
-    useEffect(() => {
-      if (inputRef.current) {
+    // Measure and apply the cursor position synchronously before paint so
+    // the cursor moves without React render lag.
+    useLayoutEffect(() => {
+      if (inputRef.current && cursorRef.current) {
         const width = measureTextWidth(displayValue);
-        setCursorPosition(width);
+        cursorRef.current.style.left = `${Math.max(0, width)}px`;
       }
     }, [displayValue, measureTextWidth]);
 
     const handleFocus = () => {
       setIsFocused(true);
-      // Update cursor position on focus
-      if (inputRef.current) {
+      // Update cursor position immediately on focus
+      if (inputRef.current && cursorRef.current) {
         const width = measureTextWidth(displayValue);
-        setCursorPosition(width);
+        cursorRef.current.style.left = `${Math.max(0, width)}px`;
       }
     };
 
@@ -107,8 +108,8 @@ export const Display = forwardRef<DisplayRef, DisplayProps>(
             <div
               aria-hidden="true"
               className="pointer-events-none absolute top-0 h-full w-0.5 bg-foreground"
+              ref={cursorRef}
               style={{
-                left: `${Math.max(0, cursorPosition)}px`,
                 animation: 'blink 1s infinite',
                 zIndex: 1,
               }}
